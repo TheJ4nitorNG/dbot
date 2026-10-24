@@ -27,7 +27,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const fs = require('fs');
 // The Brain/Personality
-let systemPrompt = fs.readFileSync('const systemPrompt = `You are an AI.txt', 'utf8');
+let systemPrompt = fs.readFileSync('const systemPrompt = `YOURTEXTFILE.txt', 'utf8');
 
 // Clean up any JS syntax if the file was saved as a JS string literal
 if (systemPrompt.startsWith('const systemPrompt = `')) {
