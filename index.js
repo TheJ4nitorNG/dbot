@@ -46,7 +46,7 @@ const MAX_HISTORY = 50; // Keeps the last 50 messages for context
 const activeConversations = new Map();
 
 client.once('ready', () => {
-    console.log(`💅 ${client.user.tag} is online and already judging everyone.`);
+    console.log(` ${client.user.tag} is online`);
 });
 
 client.on('messageCreate', async (message) => {
@@ -70,7 +70,7 @@ client.on('messageCreate', async (message) => {
 
     // Determine if Terri is being spoken to (directly mentioned, named, or replied to)
     const directlyMentioned = message.mentions.has(client.user);
-    const mentionsName = /\bterri\b/i.test(message.content);
+    const mentionsName = /\b#BOTSNAME#\b/i.test(message.content);
 
     // Check if there is an active ongoing conversation in this channel
     let isOngoingConversation = false;
@@ -97,7 +97,7 @@ client.on('messageCreate', async (message) => {
             // Strip the bot's @mention out of the message
             let userMessage = message.content.replace(`<@${client.user.id}>`, '').trim();
 
-            // If the message starts with "terri", let's strip it clean so the AI gets a clean prompt
+            // If the message starts with "BOTSNAME", let's strip it clean so the AI gets a clean prompt
             if (userMessage.toLowerCase().startsWith('terri')) {
                 userMessage = userMessage.slice(5).replace(/^[,.:\s]+/, '').trim();
             }
@@ -135,7 +135,7 @@ client.on('messageCreate', async (message) => {
                 contents: history,
                 config: {
                     systemInstruction: systemPrompt,
-                    temperature: 0.8, // Maximum sass
+                    temperature: 0.8, //will follow prompt exactly at 1.0
                 }
             });
 
